@@ -32,7 +32,12 @@ io.on('connection', (client) => {
 
   client.on('del', (data) => {
     console.log(`Received del ${data}`);
-    client.emit('del', data);
+    client.broadcast.emit('del', data);
+  });
+
+  client.on('new', (data) => {
+    console.log(`Received del ${data}`);
+    client.broadcast.emit('new', data);
   });
 });
 module.exports = io;

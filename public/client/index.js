@@ -13,7 +13,7 @@ function newMsg(msg) {
 }
 
 function delMsg(id) {
-  const p = document.querySelector(`#${id}`);
+  const p = document.getElementById(id);
   if (p) {
     p.classList.remove('fadeIn');
     p.classList.add('fadeOut');
