@@ -15,7 +15,14 @@ client.on('message', (channel, tags, message) => {
   let msg = message.toLocaleLowerCase();
   if (message.startsWith('!pregunta')) {
     msg = message.replace('!pregunta', '').trim();
-    io.emit('msg', msg);
+    console.log(`mandando pregunta${msg}`);
+
+    io.on('connection', (ioClient) => {
+      ioClient.emit('msg', msg);
+    });
   }
 });
-module.exports = client;
+module.exports = {
+  client,
+  io,
+};

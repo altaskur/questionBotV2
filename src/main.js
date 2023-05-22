@@ -1,8 +1,7 @@
 require('dotenv').config();
 
-const io = require('./io/settings');
 const app = require('./express/settings');
-const client = require('./tmi/settings');
+const { client, io } = require('./tmi/settings');
 
 io.listen(process.env.PORT_IO, () => {
   console.log('Socket-io server on port ', process.env.PORT_IO);

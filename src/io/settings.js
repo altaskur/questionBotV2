@@ -3,7 +3,7 @@ const io = require('socket.io')(
   (httpServer,
   {
     cors: {
-      origin: 'http://localhost:3004',
+      origin: 'http://localhost:3021',
     },
   }),
 );
