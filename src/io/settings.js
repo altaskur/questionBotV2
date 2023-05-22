@@ -1,3 +1,5 @@
+const { getMessagesAdmin } = require('../app/messages');
+
 const httpServer = require('http').createServer();
 const io = require('socket.io')(
   (httpServer,
@@ -10,15 +12,17 @@ const io = require('socket.io')(
 
 io.on('connection', (client) => {
   client.on('connect', () => {
-    console.log('Client connected');
+    console.log('Sending all data');
+    client.emit('all', getMessagesAdmin());
   });
 
   client.on('disconnect', () => {
     console.log('Client disconnected');
   });
 
-  client.on('event', (data) => {
-    console.log('[New event] Received event', data);
+  client.on('all', () => {
+    console.log('[New client] Sending data');
+    client.emit('all', getMessagesAdmin());
   });
 
   client.on('ping', () => {
