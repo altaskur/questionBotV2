@@ -4,9 +4,13 @@ const messages = [];
 function getMessagesAdmin() {
   return messagesAdmin;
 }
+function getMessages() {
+  return messagesAdmin;
+}
 
 function setMessagesAdmin(message) {
   messagesAdmin.push(message);
+  messages.push(message);
 }
 function getLastId() {
   const lastId = messagesAdmin.length;
@@ -17,5 +21,6 @@ function getLastId() {
 module.exports = {
   getMessagesAdmin,
   setMessagesAdmin,
+  getMessages,
   getLastId,
 };

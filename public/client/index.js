@@ -4,12 +4,24 @@ const socket = io('http://localhost:3020');
 function newMsg(msg) {
   const articleElement = document.querySelector('article');
   console.log('recived msg', msg);
-  const newMesg = document.createElement('p');
-  newMesg.textContent = `[${msg.id}] ${msg.displayName}: ${msg.msg}`;
-  newMesg.style.transform = 'translateX(100vw)';
-  newMesg.classList.add('fadeIn');
+  const p = document.createElement('p');
+  p.textContent = `[${msg.id}] ${msg.displayName}: ${msg.msg}`;
+  p.style.transform = 'translateX(100vw)';
+  p.classList.add('fadeIn');
+  p.id = msg.id;
+  articleElement.appendChild(p);
+}
 
-  articleElement.appendChild(newMesg);
+function delMsg(id) {
+  const p = document.querySelector(`#${id}`);
+  if (p) {
+    p.classList.remove('fadeIn');
+    p.classList.add('fadeOut');
+
+    setTimeout(() => {
+      p.remove();
+    }, 2200);
+  }
 }
 const button = document.querySelector('button');
 
@@ -36,4 +48,9 @@ socket.on('all', (data) => {
 socket.on('new', (data) => {
   console.log(`Received msg ${data}`);
   newMsg(data);
+});
+
+socket.on('del', (data) => {
+  console.log(`Deleting msg ${data}`);
+  delMsg(data);
 });

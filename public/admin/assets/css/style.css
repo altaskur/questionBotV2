@@ -1,0 +1,15 @@
+.crossOut{
+    color: gray;
+    text-decoration: line-through;
+}
+.fadeIn {
+    transition: all 1s;
+    animation: fadeIn 2s ease 0s forwards;
+  }
+  @keyframes fadeIn {
+    from {
+    }
+    to {
+      transform: translateX(0);
+    } /* Segundo y último fotograma */
+  }
