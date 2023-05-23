@@ -1,42 +1,34 @@
-const { getMessagesAdmin, getMessages } = require('../app/messages');
+const {
+  removeClientList, messages, messagesAdmin, changeState,
+// eslint-disable-next-line import/order
+} = require('../app/messages');
 
 const httpServer = require('http').createServer();
 const io = require('socket.io')(
   (httpServer,
   {
     cors: {
-      origin: 'http://localhost:3021',
+      origin: '*',
     },
   }),
 );
 
 io.on('connection', (client) => {
-  client.on('disconnect', () => {
-    console.log('Client disconnected');
-  });
-
   client.on('all', () => {
-    console.log('[New client] Sending data');
-    client.emit('all', getMessages());
+    client.emit('all', messages);
   });
 
   client.on('allAdmin', () => {
-    console.log('[New client] Sending data');
-    client.emit('all', getMessagesAdmin());
+    client.emit('allAdmin', messagesAdmin);
   });
 
-  client.on('ping', () => {
-    console.log('Received ping');
-    client.emit('ping', 'pong');
-  });
-
-  client.on('del', (data) => {
-    console.log(`Received del ${data}`);
-    client.broadcast.emit('del', data);
+  client.on('del', (id) => {
+    removeClientList(id);
+    changeState(id);
+    client.broadcast.emit('del', id);
   });
 
   client.on('new', (data) => {
-    console.log(`Received del ${data}`);
     client.broadcast.emit('new', data);
   });
 });
