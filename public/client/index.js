@@ -22,11 +22,6 @@ function delMsg(id) {
     }, 2200);
   }
 }
-const button = document.querySelector('button');
-
-button.addEventListener('click', () => {
-  socket.emit('ping', 'ping');
-});
 
 socket.on('connect', () => {
   socket.emit('all');
