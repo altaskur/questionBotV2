@@ -4,7 +4,7 @@ let messagesAdmin = [];
 let messages = [];
 
 function changeState(id) {
-  const idNumber = parseInt(id, 2);
+  const idNumber = parseInt(id, 10);
   messagesAdmin = messagesAdmin.map((msgAdmin) => {
     if (msgAdmin.id === idNumber) {
       // eslint-disable-next-line no-param-reassign
@@ -25,7 +25,7 @@ function getLastId() {
 }
 
 function removeClientList(id) {
-  const idNumber = parseInt(id, 2);
+  const idNumber = parseInt(id, 10);
   const index = messages.findIndex((message) => message.id === idNumber);
   if (index !== -1) {
     messages.splice(index, 1);

@@ -22,7 +22,7 @@ io.on('connection', (client) => {
     client.emit('allAdmin', messagesAdmin);
   });
 
-  client.on('del', (id) => {
+  client.on('AdminDel', (id) => {
     removeClientList(id);
     changeState(id);
     client.broadcast.emit('del', id);
